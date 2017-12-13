@@ -1,0 +1,12 @@
+﻿body {
+    background-color:darkgreen;
+}
+
+.register-form{
+    background-color:white;
+    border-radius:8px;
+}
+
+.topic{
+    border-bottom:5px solid darkgreen;
+}

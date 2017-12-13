@@ -1,0 +1,11 @@
+﻿body {
+    background-image: url(Images/blurred-background-3.jpg);
+    background-repeat:no-repeat;
+    background-size: 100%;
+}
+button{
+    cursor:pointer;
+}
+.disabled{
+    cursor:not-allowed;
+}

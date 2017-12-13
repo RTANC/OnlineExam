@@ -1,0 +1,16 @@
+﻿body {
+    background-image: url(Images/blurred-background-3.jpg);
+    background-repeat:no-repeat;
+    background-size:100%;
+}
+
+    body.student {
+        background-image: url(Images/243896-gradient.jpg);
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+
+.login {
+    background-color: white;
+    border-radius: 8px;
+}
