@@ -84,6 +84,7 @@ Public Class MakeQuestionHandler : Implements IHttpHandler
             cmd.Parameters.AddWithValue("@c5", DBNull.Value)
             cmd.Parameters.AddWithValue("@ac", DBNull.Value)
         End If
+        cmd.Parameters.AddWithValue("@b", q.bloom)
         cmd.Parameters.AddWithValue("@sc", q.score)
         con.Open()
         cmd.ExecuteNonQuery()
@@ -173,6 +174,7 @@ Public Class MakeQuestionHandler : Implements IHttpHandler
             cmd.Parameters.AddWithValue("@c5", DBNull.Value)
             cmd.Parameters.AddWithValue("@ac", DBNull.Value)
         End If
+        cmd.Parameters.AddWithValue("@b", q.bloom)
         cmd.Parameters.AddWithValue("@sc", q.score)
         con.Open()
         cmd.ExecuteNonQuery()

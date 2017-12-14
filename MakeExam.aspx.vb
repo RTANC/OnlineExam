@@ -209,6 +209,7 @@ Partial Class MakeExam
                 q.p_value = Convert.ToSingle(rd(13))
                 q.r_value = Convert.ToSingle(rd(14))
             End If
+            q.bloom = Convert.ToByte(rd(15))
             ListOfQuestion.Add(q)
         End While
         con.Close()

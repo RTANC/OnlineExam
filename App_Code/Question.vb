@@ -17,4 +17,5 @@ Public Class Question
     Public p_value As Single
     Public r_value As Single
     Public exam_detail_id As Integer
+    Public bloom As Byte
 End Class

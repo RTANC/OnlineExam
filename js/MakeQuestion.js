@@ -25,7 +25,8 @@ $(document).ready(function () {
         ans_choice: 0,
         score: 0,
         p_value: 0,
-        r_value: 0
+        r_value: 0,
+        bloom: 0
     };
 
     loadSubject();
@@ -305,6 +306,7 @@ $(document).ready(function () {
                             } else {
                                 //ข้อสอบอัตนัย
                             }
+                            $('#select_bloom > option[value=' + q.bloom + ']').prop({ selected: true });
                             $('#num_score').val(q.score);
                             quest.score = q.score;
                             $('#quest_detail').modal('show');
@@ -349,7 +351,7 @@ $(document).ready(function () {
 
     }
 
-    function addQuestion() {      
+    function addQuestion() {
         quest.subject_id = $('#select_subject').val();
         quest.topic_id = $('#select_new_topic').val();
         quest.ans_type = $('input[name=ans_type]:checked').val();
@@ -410,7 +412,7 @@ $(document).ready(function () {
             quest.choice4 = '';
             quest.choice5 = '';
         }
-
+        quest.bloom = $('#select_bloom').val();
         quest.score = $('#num_score').val();
         formData.append('mod', mod);
         formData.append('obj', JSON.stringify(quest));
@@ -488,6 +490,7 @@ $(document).ready(function () {
         quest.ans_choice = 0;
         quest.p_value = 0;
         quest.r_value = 0;
+        quest.bloom = 0;
     }
 
 });

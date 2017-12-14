@@ -264,6 +264,21 @@
                         </div>
                         <div class="row py-3">
                             <div class="col-2">
+                                <label>Bloom taxonomy</label>
+                            </div>
+                            <div class="col-5">
+                                <select id="select_bloom" class="custom-select">
+                                    <option value="1">ความรู้ที่เกิดจากความจำ</option>
+                                    <option value="2">ความเข้าใจ</option>
+                                    <option value="3">การประยุกต์</option>
+                                    <option value="4">การวิเคราะห์</option>
+                                    <option value="5">การสังเคราะห์</option>
+                                    <option value="6">การประเมินค่า</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row py-3">
+                            <div class="col-2">
                                 <label>คะแนน</label>
                             </div>
                             <div class="col-2">

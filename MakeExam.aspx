@@ -290,6 +290,14 @@
                             </div>
                             <div class="row py-1">
                                 <div class="col-2">
+                                    <label>Bloom taxonomy</label>
+                                </div>
+                                <div class="col-5">
+                                    <label id="lbl_bloom"></label>
+                                </div>
+                            </div>
+                            <div class="row py-1">
+                                <div class="col-2">
                                     <label>คะแนน</label>
                                 </div>
                                 <div class="col-2">

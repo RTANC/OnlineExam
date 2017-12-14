@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     $('.mainLink').removeClass('active');
     $($('.mainLink')[1]).addClass('active');
-
+    var bloomMap = ['ยังไม่กำหนด', 'ความรู้ที่เกิดจากความจำ', 'ความเข้าใจ', 'การประยุกต์', 'การวิเคราะห์', 'การสังเคราะห์', 'การประเมินค่า'];
     var jc = $.dialog({
         closeIcon: false,
         lazyOpen: true,
@@ -21,6 +21,9 @@
     getFullScore();
 
     //getTotalScore();
+    $('#select_exam_copy').change(function () {
+        getExamAnalysis();
+    });
 
     $('#btn_gotoSchedule').click(function () {
         Cookies.remove('ex_id');
@@ -333,6 +336,7 @@
                     } else {
                         //อัตนัย
                     }
+                    $('#lbl_bloom').text(bloomMap[q.bloom]);
                     $('#lbl_score').text(q.score);
                     $('#modal_question').modal('show');
                 });
