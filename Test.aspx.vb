@@ -66,7 +66,7 @@ Partial Class Test
                 q.ans_choice = vbNull
             End If
             q.score = Convert.ToInt32(rd(12))
-            q.exam_detail_id = Convert.ToInt32(rd(15))
+            q.exam_detail_id = Convert.ToInt32(rd(16))
             ListOfQuestion.Add(q)
         End While
         con.Close()
