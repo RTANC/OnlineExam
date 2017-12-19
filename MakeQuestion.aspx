@@ -24,7 +24,7 @@
             <div class="col">
                 <button id="btn_addTopic" type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
                 <button id="btn_editTopic" type="button" class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                <button id="btn_delTopic" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                <%--<button id="btn_delTopic" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>--%>
             </div>
         </div>
         <div class="row py-2">
