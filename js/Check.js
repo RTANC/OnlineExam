@@ -201,9 +201,21 @@
                             (p < (fullScore[i].fullScore * gain)) ? td.addClass('text-danger') : td;
                             $(row).append(td);
                         }
+                        if (stu.examinee_check == 0) $(row).addClass('alert alert-danger');
                         $('#show_student > tbody').append(row);
                     });
                     $('#show_student').paging();
+                    var ExportButtons = document.getElementById('show_student');
+                    var instance = new TableExport(ExportButtons, {
+                        formats: ['xlsx'],
+                        exportButtons: false,
+                        filename: 'รายงานคะแนนสอบ'
+                    });
+                    //                                        // "id" of selector    // format
+                    var exportData = instance.getExportData()['show_student']['xlsx'];
+                    $('#btn_ReportScore').removeClass('d-none').click(function () {
+                        instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
+                    });
                 }
             }
         });
@@ -277,15 +289,15 @@
                     $('#btn_exam_analysis').removeClass('d-none');
                     $('#show_analysis > tbody').append('<tr><td class="text-center" colspan= "8">ไม่มีข้อมูลในระบบ</td></tr>');
                 } else {
-                    $('#btn_exam_analysis').addClass('d-none');                    
+                    $('#btn_exam_analysis').addClass('d-none');
                     $(data.d).each(function (i, ea) {
-                        var row = $('<tr>');                
+                        var row = $('<tr>');
                         if (((i + 1) % 5) == 1) {
                             $(row).append($('<td>', { rowspan: 5 }).addClass('text-center').append($('<a>', { text: ea.question_id, href: '#!' }).addClass('btn btn-link').click(function () {
                                 questionMoreDetail($(this).text());
                             })));
                         }
-                        $(row).append($('<td>', { text: ea.choice }).addClass('text-center'), $('<td>', { text: ea.h }).addClass('text-center'), $('<td>', { text: ea.l }).addClass('text-center'), $('<td>', { text: ea.ph }).addClass('text-center'), $('<td>', { text: ea.pl }).addClass('text-center'), $('<td>', { text: ea.p }).addClass('text-center'), $('<td>', { text: ea.r }).addClass('text-center'));                 
+                        $(row).append($('<td>', { text: ea.choice }).addClass('text-center'), $('<td>', { text: ea.h }).addClass('text-center'), $('<td>', { text: ea.l }).addClass('text-center'), $('<td>', { text: ea.ph }).addClass('text-center'), $('<td>', { text: ea.pl }).addClass('text-center'), $('<td>', { text: ea.p }).addClass('text-center'), $('<td>', { text: ea.r }).addClass('text-center'));
                         if (ea.key_choice == '1') {
                             $(row).find('td[rowspan!=5]').addClass('table-success');
                         }

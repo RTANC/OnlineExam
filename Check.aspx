@@ -22,6 +22,14 @@
             <button id="btn_gotoSchedule" type="button" class="btn btn-light my-2"><i class="fa fa-search">&nbsp;</i>ตารางสอบ</button>
         </div>
     </div>
+    <div class="row px-2 py-2">
+        <div class="col-2 text-center">
+            <h4>คะแนนสอบ</h4>
+        </div>
+        <div class="col">
+            <button id="btn_ReportScore" class="btn btn-info d-none">ออกรายงานคะแนน</button>
+        </div>
+    </div>
     <div class="row">
         <table id="show_student" class="table table-bordered">
             <thead class="table-inverse">
