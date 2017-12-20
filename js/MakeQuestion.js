@@ -317,10 +317,11 @@ $(document).ready(function () {
                             delQuestion(q);
                         });
 
-                        var row = $('<tr>').append($('<td>', { text: q.question_text }), $('<td>', { text: (q.p_value == '') ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == '') ? 'N/A' : q.r_value }), $('<td>').append(btn_edit), $('<td>').append(btn_del));
+                        var row = $('<tr>').append($('<td>', { text: q.question_text }), $('<td>', { text: (q.p_value == '-1') ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == '-1') ? 'N/A' : q.r_value }), $('<td>').append(btn_edit), $('<td>').append(btn_del));
 
                         $('#show_quest > tbody').append(row);
                     });
+                    $('#show_quest').paging();
                 }
             },
             error: function () {

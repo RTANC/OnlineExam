@@ -116,7 +116,7 @@ Partial Class MakeQuestion
         Dim con As New SqlConnection(cs)
         con.Close()
         Dim ListOfQuestion As New List(Of Question)
-        Dim cmd As New SqlCommand("select * from question where subject_id = @sid and topic_id = @tid and ans_type = @at", con)
+        Dim cmd As New SqlCommand("select question_id,subject_id,topic_id,question_text,question_img,ans_type,choice1,choice2,choice3,choice4,choice5,ans_choice,score,STR(p_value,10,3) p_value,STR(r_value,10,3) r_value,bloom from question where subject_id = @sid and topic_id = @tid and ans_type = @at", con)
         cmd.Parameters.AddWithValue("@sid", sid)
         cmd.Parameters.AddWithValue("@tid", tid)
         cmd.Parameters.AddWithValue("@at", at)
@@ -164,6 +164,14 @@ Partial Class MakeQuestion
             If Not IsDBNull(rd(13)) And Not IsDBNull(rd(14)) Then
                 q.p_value = Convert.ToSingle(rd(13))
                 q.r_value = Convert.ToSingle(rd(14))
+            Else
+                If IsDBNull(rd(13)) Then
+                    q.p_value = -1
+                End If
+
+                If IsDBNull(rd(14)) Then
+                    q.r_value = -1
+                End If
             End If
             q.bloom = Convert.ToByte(rd(15))
             ListOfQuestion.Add(q)
