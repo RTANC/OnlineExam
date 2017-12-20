@@ -302,9 +302,9 @@
                             $(row).find('td[rowspan!=5]').addClass('table-success');
                         }
                         $('#show_analysis > tbody').append(row);
-                    });
-                    $('#show_analysis').paging();
+                    });                   
                 }
+                $('#show_analysis').paging();
             }
         });
     }
