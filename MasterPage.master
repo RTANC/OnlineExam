@@ -14,6 +14,7 @@
     <%--<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />--%>
     <link rel="stylesheet" type="text/css" href="fullcalendar-3.6.2/fullcalendar.min.css"/>
     <link type="text/css" rel="stylesheet" href="css/jquery.qtip.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/dataTables.bootstrap4.min.css"/>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -35,6 +36,9 @@
                 </li>
                 <li class="nav-item mainLink">
                     <a class="nav-link" href="Subject.aspx">จัดการรายวิชา</a>
+                </li>
+                <li class="nav-item mainLink">
+                    <a class="nav-link" href="Evaluate.aspx">ประเมินผล</a>
                 </li>
             </ul>
         </div>
@@ -62,6 +66,8 @@
     <script src="js/xlsx.core.min.js"></script>
     <script src="js/FileSaver.min.js"></script>
     <script src="js/tableexport.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap4.min.js"></script>
     <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
     </asp:ContentPlaceHolder>
 </body>
