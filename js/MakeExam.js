@@ -165,7 +165,7 @@
                 //$('#show_student').paging();
                 $('#show_student.display').DataTable({
                     "language": {
-                        "url": "/language/Thai.json"
+                        "url": "language/Thai.json"
                     }
                 });
             }
@@ -303,7 +303,7 @@
                     //$('#show_select_question').paging();
                     $('#show_select_question.display').DataTable({
                         "language": {
-                            "url": "/language/Thai.json"
+                            "url": "language/Thai.json"
                         }
                     });
                 } else {
@@ -389,7 +389,7 @@
                     //$('#show_question').paging();
                     $('#show_question.display').DataTable({
                         "language": {
-                            "url": "/language/Thai.json"
+                            "url": "language/Thai.json"
                         }
                     });
                 }

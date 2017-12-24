@@ -207,7 +207,7 @@
                     //$('#show_student').paging();
                     $('#show_student.display').DataTable({
                         "language": {
-                            "url": "/language/Thai.json"
+                            "url": "language/Thai.json"
                         }
                     });
                     var ExportButtons = document.getElementById('show_student');

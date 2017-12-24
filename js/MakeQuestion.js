@@ -323,7 +323,7 @@ $(document).ready(function () {
                     });
                     $('#show_quest').DataTable({
                         "language": {
-                            "url": "/language/Thai.json"
+                            "url": "language/Thai.json"
                         }
                     });
                 }

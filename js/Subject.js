@@ -104,7 +104,12 @@
                     });
                     $('#show_subject > tbody').append($('<tr>').append($('<th>', { text: subject.subject_no, scope: 'row' }), $('<td>', { text: subject.subject_name }), $('<td>').append(btn_edit), $('<td>').append(btn_del)));
                 });
-                $('#show_subject').paging();
+                //$('#show_subject').paging();
+                $('#show_subject').DataTable({
+                    "language": {
+                        "url": "language/Thai.json"
+                    }
+                });
             },
             error: function () {
                 $.confirm({

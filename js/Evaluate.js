@@ -4,7 +4,7 @@
     $('#txt_year').val(parseInt(moment().format('YYYY')) + 543);
     $('#show_exam').DataTable({
         "language": {
-            "url": "/language/Thai.json"
+            "url": "language/Thai.json"
         }
     });
     var conType = 'application/json;charset=utf-8';
