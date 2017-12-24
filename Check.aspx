@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="row">
-        <table id="show_student" class="table table-bordered">
+        <table id="show_student" class="table table-bordered display" cellspacing="0">
             <thead class="table-inverse">
                 <tr>
                     <th class="text-center">รหัสนิสิต</th>
@@ -62,7 +62,7 @@
         </div>
     </div>
     <div class="row">
-        <table id="show_analysis" class="table table-responsive table-bordered">
+        <table id="show_analysis" class="table table-responsive table-bordered display" cellspacing="0">
             <thead class="table-info">
                 <tr>
                     <th class="text-center">รหัสโจทย์</th>

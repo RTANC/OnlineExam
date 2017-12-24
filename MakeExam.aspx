@@ -42,7 +42,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <table id="show_student" class="table">
+                <table id="show_student" class="table display" cellspacing="0">
                     <thead class="table-success">
                         <tr>
                             <th class="text-center">รหัสนิสิต</th>
@@ -62,7 +62,7 @@
                             <td>
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-3">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <input name="stu_type" value="1" type="radio" checked="checked" />&nbsp;นรพ.&nbsp;
@@ -70,7 +70,7 @@
                                                 <input id="c1" name="c" type="number" class="form-control" min="0" />
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-3">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <input name="stu_type" value="2" type="radio" />&nbsp;นรช.&nbsp;
@@ -78,7 +78,7 @@
                                                 <input id="c2" name="c" type="number" class="form-control" min="0" disabled="disabled" />
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-3">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <input name="stu_type" value="3" type="radio" />&nbsp;นทน.&nbsp;
@@ -136,7 +136,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <table id="show_question" class="table">
+                <table id="show_question" class="table display" cellspacing="0">
                     <thead class="table-info">
                         <tr>
                             <th class="text-center w-100">โจทย์</th>
@@ -177,7 +177,7 @@
                     <div class="modal-body container-fluid">
                         <div class="row">
                             <div class="col">
-                                <table id="show_select_question" class="table table-hover mt-3 table-bordered">
+                                <table id="show_select_question" class="table table-hover mt-3 table-bordered display" cellspacing="0">
                                     <thead class="table-inverse">
                                         <tr>
                                             <th class="text-center w-100">โจทย์</th>

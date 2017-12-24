@@ -204,7 +204,12 @@
                         if (stu.examinee_check == 0) $(row).addClass('alert alert-danger');
                         $('#show_student > tbody').append(row);
                     });
-                    $('#show_student').paging();
+                    //$('#show_student').paging();
+                    $('#show_student.display').DataTable({
+                        "language": {
+                            "url": "/language/Thai.json"
+                        }
+                    });
                     var ExportButtons = document.getElementById('show_student');
                     var instance = new TableExport(ExportButtons, {
                         formats: ['xlsx'],
@@ -304,7 +309,7 @@
                         $('#show_analysis > tbody').append(row);
                     });                   
                 }
-                $('#show_analysis').paging();
+                $('#show_analysis').paging();               
             }
         });
     }
