@@ -53,7 +53,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-center" colspan="4">ไม่มีข้อมูลในระบบ</td>
+                           
                         </tr>
                     </tbody>
                     <tfoot>
@@ -147,9 +147,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <%--<tr>
                             <td class="text-center" colspan="5">ไม่มีข้อมูลในระบบ</td>
-                        </tr>
+                        </tr>--%>
                     </tbody>
                     <tfoot>
                         <tr>
@@ -187,9 +187,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <%--<tr>
                                             <td class="text-center" colspan="4">ไม่มีข้อมูลแสดง</td>
-                                        </tr>
+                                        </tr>--%>
                                     </tbody>
                                 </table>
                             </div>
