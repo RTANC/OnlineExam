@@ -308,7 +308,6 @@
                         $('#show_analysis > tbody').append(row);
                     });
                 }
-<<<<<<< HEAD
                 //$('#show_analysis').paging();    
                 var tbl = $('#show_analysis').DataTable({
                     'rowsGroup': [0],
@@ -316,9 +315,6 @@
                         "url": "/language/Thai.json"
                     }
                 }).order([0,'desc']);
-=======
-                $('#show_analysis').paging();
->>>>>>> 9519390b1ea6436d9337217ce828ce856bc96ac3
             }
         });
     }
