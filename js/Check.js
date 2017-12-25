@@ -312,7 +312,7 @@
                 var tbl = $('#show_analysis').DataTable({
                     'rowsGroup': [0],
                     "language": {
-                        "url": "/language/Thai.json"
+                        "url": "language/Thai.json"
                     }
                 }).order([0,'desc']);
             }
