@@ -28,7 +28,11 @@ $(document).ready(function () {
         r_value: 0,
         bloom: 0
     };
-
+    var tbl_quest = $('#show_quest').DataTable({
+        "language": {
+            "url": "language/Thai.json"
+        }
+    });
     loadSubject();
 
     $('#select_subject').change(function () {
@@ -225,7 +229,8 @@ $(document).ready(function () {
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 if ($(data.d).length == 0) {
-                    $('#show_quest > tbody').empty();
+                    //$('#show_quest > tbody').empty();
+                    tbl_quest.clear().draw();
                     //$('#show_quest > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: '5' }).addClass('text-center')));
                     jc.close();
                     $.confirm({
@@ -262,7 +267,7 @@ $(document).ready(function () {
             dataType: 'json',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
-                $('#show_quest > tbody').empty();
+                tbl_quest.clear();
                 $(data.d).each(function (i, q) {
                     var btn_edit = $('<button>').addClass('btn btn-warning').append('<i class="fa fa-pencil"></i>').click(function () {
                         mod = 2;
@@ -316,18 +321,13 @@ $(document).ready(function () {
 
                     var row = $('<tr>').append($('<td>', { text: q.question_text }), $('<td>', { text: (q.p_value == '-1') ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == '-1') ? 'N/A' : q.r_value }), $('<td>').append(btn_edit), $('<td>').append(btn_del));
 
-                    $('#show_quest > tbody').append(row);
+                    //$('#show_quest > tbody').append(row);
+                    tbl_quest.row.add(row);
                 });
-                $('#show_quest').DataTable({
-                    retrieve: true,
-                    "language": {
-                        "url": "language/Thai.json"
-                    }
-                });
-
+                tbl_quest.draw();
             },
             error: function () {
-                $('#show_quest > tbody').empty();
+                tbl_quest.clear().draw();
                 //$('#show_quest > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: '5' }).addClass('text-center')));
                 $.confirm({
                     title: 'Error!',

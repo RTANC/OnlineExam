@@ -13,6 +13,17 @@
     $(document).ajaxStart(function () {
         jc.open();
     });
+    var tbl_student = $('#show_student').DataTable({
+        "language": {
+            "url": "language/Thai.json"
+        }
+    });
+    var tbl_analysis = $('#show_analysis').DataTable({
+        'rowsGroup': [0],
+        "language": {
+            "url": "language/Thai.json"
+        }
+    });
     $(document).ajaxStop(function () {
         jc.close();
     });
@@ -153,7 +164,7 @@
             dataType: 'json',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
-                $('#show_student > tbody').empty();
+                tbl_student.clear();
                 var obj = JSON.parse(data.d);
                 var gain = parseInt($('#lbl_exam_gain').text()) / 100;
                 $(obj).each(function (i, stu) {
@@ -192,22 +203,16 @@
                         fullName = 'นทน.&emsp;' + stu.student_fname + '&emsp;&emsp;&emsp;&emsp;&emsp;' + stu.student_lname;
                     }
                     var row = $('<tr>').append($('<td>', { text: stu.student_id }).addClass('text-center'), $('<td>', { html: fullName }));
-                    for (var i = 0; i < fullScore.length; i++) {
-                        var p = stu[fullScore[i].topic_name];
+                    for (var j = 0; j < fullScore.length; j++) {
+                        var p = stu[fullScore[j].topic_name];
                         var td = $('<td>', { text: p }).addClass('text-center w-25');
-                        (p < (fullScore[i].fullScore * gain)) ? td.addClass('text-danger') : td;
+                        (p < (fullScore[j].fullScore * gain)) ? td.addClass('text-danger') : td;
                         $(row).append(td);
                     }
                     if (stu.examinee_check == 0) $(row).addClass('alert alert-danger');
-                    $('#show_student > tbody').append(row);
+                    tbl_student.row.add(row);
                 });
-                //$('#show_student').paging();
-                $('#show_student.display').DataTable({
-                    retrieve: true,
-                    "language": {
-                        "url": "language/Thai.json"
-                    }
-                });
+                tbl_student.draw();
                 var ExportButtons = document.getElementById('show_student');
                 var instance = new TableExport(ExportButtons, {
                     formats: ['xlsx'],
@@ -287,7 +292,7 @@
             dataType: 'json',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
-                $('#show_analysis > tbody').empty();
+                tbl_analysis.clear();
                 if ($(data.d).length == 0) {
                     $('#btn_exam_analysis').removeClass('d-none');
                     //$('#show_analysis > tbody').append('<tr><td class="text-center" colspan= "8">ไม่มีข้อมูลในระบบ</td></tr>');
@@ -306,17 +311,12 @@
                         if (ea.key_choice == '1') {
                             $(row).find('td[rowspan!=5]').addClass('table-success');
                         }
-                        $('#show_analysis > tbody').append(row);
+                        //$('#show_analysis > tbody').append(row);
+                        tbl_analysis.row.add(row);
                     });
+                    tbl_analysis.draw().order([0, 'desc']);
                 }
-                //$('#show_analysis').paging();    
-                var tbl = $('#show_analysis').DataTable({
-                    'rowsGroup': [0],
-                    retrieve: true,
-                    "language": {
-                        "url": "language/Thai.json"
-                    }
-                }).order([0, 'desc']);
+
             }
         });
     }

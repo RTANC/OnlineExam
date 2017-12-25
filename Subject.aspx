@@ -18,7 +18,7 @@
         <div class="col-1">
         </div>
         <div class="col-10">
-            <table id="show_subject" class="table table-responsive table-bordered w-100">
+            <table id="show_subject" class="table table-responsive table-bordered w-100" cellspacing="0">
                 <thead class="table-inverse">
                     <tr>
                         <th class="text-center">รหัสวิชา</th>

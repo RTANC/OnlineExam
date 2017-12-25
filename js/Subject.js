@@ -17,6 +17,11 @@
         loadSubject();
     });
 
+    var tbl_subject = $('#show_subject').DataTable({
+        "language": {
+            "url": "language/Thai.json"
+        }
+    });
     $('#txt_sub_no,#txt_sub_name,#txt_edit_sub_no,#txt_edit_sub_name').keyup(function () {
         var objId = $(this).prop('id');
         if (objId == 'txt_sub_no' || objId == 'txt_edit_sub_no') {
@@ -90,7 +95,7 @@
             dataType: 'json',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
-                $('#show_subject > tbody').empty();
+                tbl_subject.clear();
                 $(data.d).each(function (i, subject) {
                     var btn_edit = $('<button>').addClass('btn btn-warning').append('<i class="fa fa-pencil" aria-hidden="true"></i>').click(function () {
                         $('#txt_edit_sub_id').val(subject.subject_id);
@@ -102,15 +107,11 @@
                     var btn_del = $('<button>').addClass('btn btn-danger').append('<i class="fa fa-eraser" aria-hidden="true"></i>').click(function () {
                         delSubject(subject.subject_id);
                     });
-                    $('#show_subject > tbody').append($('<tr>').append($('<th>', { text: subject.subject_no, scope: 'row' }), $('<td>', { text: subject.subject_name }), $('<td>').append(btn_edit), $('<td>').append(btn_del)));
+                    //$('#show_subject > tbody').append($('<tr>').append($('<th>', { text: subject.subject_no, scope: 'row' }), $('<td>', { text: subject.subject_name }), $('<td>').append(btn_edit), $('<td>').append(btn_del)));
+                    var r = $('<tr>').append($('<th>', { text: subject.subject_no, scope: 'row' }), $('<td>', { text: subject.subject_name }), $('<td>').append(btn_edit), $('<td>').append(btn_del));
+                    tbl_subject.row.add(r);
                 });
-                //$('#show_subject').paging();
-                $('#show_subject').DataTable({
-                    retrieve: true,
-                    "language": {
-                        "url": "language/Thai.json"
-                    }
-                });
+                tbl_subject.draw();                
             },
             error: function () {
                 $.confirm({

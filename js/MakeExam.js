@@ -10,19 +10,26 @@
         title: 'Loading!',
         content: 'กำลังโหลด!'
     });
-
     
-    $(document).ajaxStart(function () {
+    $(document).ajaxStart(function () {       
         jc.open();
     });
-
+    var tbl_student = $('#show_student').DataTable({
+        "language": {
+            "url": "language/Thai.json"
+        }
+    });
+    var tbl_question = $('#show_question').DataTable({
+        "language": {
+            "url": "language/Thai.json"
+        }
+    });
+    var tbl_select_question = $('#show_select_question').DataTable({
+        "language": {
+            "url": "language/Thai.json"
+        }
+    });
     $(document).ajaxStop(function () {
-        $('table').DataTable({
-            retrieve: true,
-            "language": {
-                "url": "language/Thai.json"
-            }
-        });
         jc.close();
     });
 
@@ -151,7 +158,7 @@
             dataType: 'json',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
-                $('#show_student > tbody').empty();
+                tbl_student.clear().draw();
                 $(data.d).each(function (i, stu) {
                     var btn_del = $('<button>').addClass('btn btn-danger').append($('<i class="fa fa-trash"></i>')).click(function () {
                         delExaminee(stu.student_id);
@@ -164,8 +171,11 @@
                     } else if (stu.student_type == 3) {
                         fullName = 'นทน.&emsp;' + stu.student_fname + '&emsp;&emsp;&emsp;&emsp;&emsp;' + stu.student_lname;
                     }
-                    $('#show_student > tbody').append($('<tr>').append($('<td>', { text: stu.student_id }).addClass('text-center'), $('<td>', { html: fullName }), $('<td>', { text: stu.examinee_passwd }).addClass('text-center'), $('<td>').append(btn_del).addClass('text-center')));
+                    //$('#show_student > tbody').append($('<tr>').append($('<td>', { text: stu.student_id }).addClass('text-center'), $('<td>', { html: fullName }), $('<td>', { text: stu.examinee_passwd }).addClass('text-center'), $('<td>').append(btn_del).addClass('text-center')));
+                    var r = $('<tr>').append($('<td>', { text: stu.student_id }).addClass('text-center'), $('<td>', { html: fullName }), $('<td>', { text: stu.examinee_passwd }).addClass('text-center'), $('<td>').append(btn_del).addClass('text-center'));
+                    tbl_student.row.add(r).draw();
                 });
+                
             }
         });
     }
@@ -256,7 +266,8 @@
             dataType: 'json',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
-                $('#show_select_question > tbody').empty();
+                //$('#show_select_question > tbody').empty();
+                tbl_select_question.clear().draw();
                 $(data.d).each(function (i, q) {
                     var ckBox = $('<input>', { name: 'quest_id', value: q.question_id, type: 'checkbox' });
                     var colQuestTxt = $('<td>', { text: q.question_text }).click(function () {
@@ -293,12 +304,14 @@
                         }
                         $('#lbl_score').text(q.score);
                     }).css({ 'cursor': 'pointer' });
-                    var row = $('<tr>').append(colQuestTxt, $('<td>', { text: (q.p_value == '') ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == '') ? 'N/A' : q.r_value }), $('<td>').addClass('text-center').append(ckBox));
-                    $('#show_select_question > tbody').append(row);
+                    var r = $('<tr>').append(colQuestTxt, $('<td>', { text: (q.p_value == '') ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == '') ? 'N/A' : q.r_value }), $('<td>').addClass('text-center').append(ckBox));
+                    //$('#show_select_question > tbody').append(row);
+                    tbl_select_question.row.add(r).draw();
                 });
             },
             error: function () {
-                $('#show_select_question > tbody').empty();
+                tbl_select_question.clear().draw();
+                //$('#show_select_question > tbody').empty();
                 //$('#show_select_question > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: 4 }).addClass('text-center')));
             }
         });
@@ -314,7 +327,8 @@
             dataType: 'json',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
-                $('#show_question > tbody').empty();
+                //$('#show_question > tbody').empty();
+                tbl_question.clear().draw();
                 $(data.d).each(function (i, q) {
                     if (q.topic_id == top_id && q.ans_type == a_type) {
                         var btn_info = $('<button>').addClass('btn btn-info').append('<i class="fa fa-info"></i>').click(function () {
@@ -366,7 +380,9 @@
                                 }
                             });
                         });
-                        $('#show_question > tbody').append($('<tr>').append($('<td>', { text: q.question_text }), $('<td>', { text: (q.p_value == 0) ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == 0) ? 'N/A' : q.r_value }), $('<td>').append(btn_info), $('<td>').append(btn_del)));
+                        //$('#show_question > tbody').append($('<tr>').append($('<td>', { text: q.question_text }), $('<td>', { text: (q.p_value == 0) ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == 0) ? 'N/A' : q.r_value }), $('<td>').append(btn_info), $('<td>').append(btn_del)));
+                        var r = $('<tr>').append($('<td>', { text: q.question_text }), $('<td>', { text: (q.p_value == 0) ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == 0) ? 'N/A' : q.r_value }), $('<td>').append(btn_info), $('<td>').append(btn_del));
+                        tbl_question.row.add(r).draw();
                     }
                 });
             }

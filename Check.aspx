@@ -34,8 +34,8 @@
         <table id="show_student" class="table table-bordered display" cellspacing="0">
             <thead class="table-inverse">
                 <tr>
-                    <th class="text-center">รหัสนิสิต</th>
-                    <th class="text-center">ชื่อ-สกุล</th>
+                    <th class="text-center w-25">รหัสนิสิต</th>
+                    <th class="text-center w-25">ชื่อ-สกุล</th>
                     <%--<th class="text-center">รุ่น</th>
                     <th class="text-center">คะแนน</th>
                     <th class="text-center">ตรวจแล้ว</th>
@@ -73,9 +73,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center" colspan="8">ไม่มีข้อมูลในระบบ</td>
-                </tr>
             </tbody>
         </table>
     </div>

@@ -2,7 +2,7 @@
     $('.mainLink').removeClass('active').addClass('d-none');
     $($('.mainLink')[3]).addClass('active').removeClass('d-none');
     $('#txt_year').val(parseInt(moment().format('YYYY')) + 543);
-    $('#show_exam').DataTable({
+    var tbl_exam = $('#show_exam').DataTable({
         "language": {
             "url": "language/Thai.json"
         }
@@ -12,12 +12,12 @@
     $('#txt_year').keyup(function () {
         if ($(this).val().length == 4) {
             getSubject();
-            $('#show_exam > tbody').empty();
+            tbl_exam.clear().draw();
         }
     });
     $('#txt_year,input[type=radio][name=term]').change(function () {
         getSubject();
-        $('#show_exam > tbody').empty();
+        tbl_exam.clear().draw();
     });
     function getSubject() {
         $.ajax({
@@ -47,12 +47,13 @@
             contentType: conType,
             success: function (data) {
                 var obj = JSON.parse(data.d);
-                $('#show_exam > tbody').empty();
+                tbl_exam.clear();
                 $(obj).each(function (i, ex) {
                     var btn_info = $('<button>').attr({ 'data-toggle': 'modal', 'data-target': '#modal_Examinfo', 'data-exid': ex.exam_id }).addClass('btn btn-info').append('<i class="fa fa-search"></i>');
-                    $('#show_exam > tbody').append($('<tr>').append($('<th>', { text: (i + 1), scope: 'row' }), $('<td>', { text: ex.subject_no }), $('<td>', { text: ex.subject_name }), $('<td>').append($(btn_info))));
+                    var r = $('<tr>').append($('<th>', { text: (i + 1), scope: 'row' }), $('<td>', { text: ex.subject_no }), $('<td>', { text: ex.subject_name }), $('<td>').append($(btn_info)));
+                    tbl_exam.row.add(r);
                 });
-                //$('#show_exam').DataTable();
+                tbl_exam.draw();
             }
         });
     }

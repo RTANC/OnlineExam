@@ -43,7 +43,7 @@
     </div>
     <div class="row py-3">
         <div class="col">
-            <table id="show_quest" class="table w-100">
+            <table id="show_quest" class="table w-100" cellspacing="0">
                 <thead class="table-inverse">
                     <tr>
                         <th class="text-center w-75">โจทย์</th>
