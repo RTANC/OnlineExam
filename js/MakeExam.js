@@ -145,9 +145,6 @@
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 $('#show_student > tbody').empty();
-                if ($(data.d).length == 0) {
-                    $('#show_student > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: 4 }).addClass('text-center')));
-                }
                 $(data.d).each(function (i, stu) {
                     var btn_del = $('<button>').addClass('btn btn-danger').append($('<i class="fa fa-trash"></i>')).click(function () {
                         delExaminee(stu.student_id);
@@ -165,7 +162,7 @@
                 //$('#show_student').paging();
                 $('#show_student.display').DataTable({
                     "language": {
-                        "url": "/language/Thai.json"
+                        "url": "language/Thai.json"
                     }
                 });
             }
@@ -259,12 +256,75 @@
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 $('#show_select_question > tbody').empty();
-                console.log($(data.d).length);
-                if ($(data.d).length != 0) {
-                    $(data.d).each(function (i, q) {
-                        var ckBox = $('<input>', { name: 'quest_id', value: q.question_id, type: 'checkbox' });
-                        var colQuestTxt = $('<td>', { text: q.question_text }).click(function () {
-                            $('.quest_detail').removeClass('d-none');
+                $(data.d).each(function (i, q) {
+                    var ckBox = $('<input>', { name: 'quest_id', value: q.question_id, type: 'checkbox' });
+                    var colQuestTxt = $('<td>', { text: q.question_text }).click(function () {
+                        $('.quest_detail').removeClass('d-none');
+                        $('#lbl_quest').text(q.question_text);
+                        if (q.question_img != null) {
+                            $('.pre_quest_img').prop({ src: q.question_img }).removeClass('d-none');
+                        } else {
+                            $('.pre_quest_img').addClass('d-none');
+                        }
+                        if (q.ans_type == 0) {
+                            var tmp = q.choice1.split(".");
+                            tmp = tmp[(tmp.length - 1)];
+                            if (tmp == 'jpg' || tmp == 'jpeg' || tmp == 'png' || tmp == 'gif') {
+                                $('.ans_txt').addClass('d-none');
+                                $('.ans_img').removeClass('d-none');
+                                $($('.pre_ans_img')[0]).attr('src', q.choice1);
+                                $($('.pre_ans_img')[1]).attr('src', q.choice2);
+                                $($('.pre_ans_img')[2]).attr('src', q.choice3);
+                                $($('.pre_ans_img')[3]).attr('src', q.choice4);
+                                $($('.pre_ans_img')[4]).attr('src', q.choice5);
+                            } else {
+                                $('.ans_txt').removeClass('d-none');
+                                $('.ans_img').addClass('d-none');
+                                $($('input[type=text][name=choice]')[0]).val(q.choice1);
+                                $($('input[type=text][name=choice]')[1]).val(q.choice2);
+                                $($('input[type=text][name=choice]')[2]).val(q.choice3);
+                                $($('input[type=text][name=choice]')[3]).val(q.choice4);
+                                $($('input[type=text][name=choice]')[4]).val(q.choice5);
+                            }
+                            $('#lbl_ans_choice').text(q.ans_choice);
+                        } else {
+                            //อัตนัย
+                        }
+                        $('#lbl_score').text(q.score);
+                    }).css({ 'cursor': 'pointer' });
+                    var row = $('<tr>').append(colQuestTxt, $('<td>', { text: (q.p_value == '') ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == '') ? 'N/A' : q.r_value }), $('<td>').addClass('text-center').append(ckBox));
+                    $('#show_select_question > tbody').append(row);
+                });
+                //$('#show_select_question').paging();
+                $('#show_select_question.display').DataTable({
+                    "language": {
+                        "url": "language/Thai.json"
+                    }
+                });
+
+            },
+            error: function () {
+                $('#show_select_question > tbody').empty();
+                //$('#show_select_question > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: 4 }).addClass('text-center')));
+            }
+        });
+    }
+
+    function getQuestionInExam() {
+        var top_id = $('#select_topic').val();
+        var a_type = $('input[type=radio][name=filter]:checked').val();
+        $.ajax({
+            url: 'MakeExam.aspx/getQuestionInExam',
+            method: 'post',
+            data: JSON.stringify({ ex_id: Cookies.get('ex_id'), ex_copy: $('input[type=number][name=numCopy]').val(), tid: top_id, at: a_type }),
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                $('#show_question > tbody').empty();
+                $(data.d).each(function (i, q) {
+                    if (q.topic_id == top_id && q.ans_type == a_type) {
+                        var btn_info = $('<button>').addClass('btn btn-info').append('<i class="fa fa-info"></i>').click(function () {
+                            mod = 2;
                             $('#lbl_quest').text(q.question_text);
                             if (q.question_img != null) {
                                 $('.pre_quest_img').prop({ src: q.question_img }).removeClass('d-none');
@@ -295,104 +355,32 @@
                             } else {
                                 //อัตนัย
                             }
+                            $('#lbl_bloom').text(bloomMap[q.bloom]);
                             $('#lbl_score').text(q.score);
-                        }).css({ 'cursor': 'pointer' });
-                        var row = $('<tr>').append(colQuestTxt, $('<td>', { text: (q.p_value == '') ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == '') ? 'N/A' : q.r_value }), $('<td>').addClass('text-center').append(ckBox));
-                        $('#show_select_question > tbody').append(row);
-                    });
-                    //$('#show_select_question').paging();
-                    $('#show_select_question.display').DataTable({
-                        "language": {
-                            "url": "/language/Thai.json"
-                        }
-                    });
-                } else {
-                    $('#show_select_question > tbody').empty();
-                    $('#show_select_question > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: 4 }).addClass('text-center')));
-                }
-            },
-            error: function () {
-                $('#show_select_question > tbody').empty();
-                $('#show_select_question > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: 4 }).addClass('text-center')));
-            }
-        });
-    }
-
-    function getQuestionInExam() {
-        var top_id = $('#select_topic').val();
-        var a_type = $('input[type=radio][name=filter]:checked').val();
-        $.ajax({
-            url: 'MakeExam.aspx/getQuestionInExam',
-            method: 'post',
-            data: JSON.stringify({ ex_id: Cookies.get('ex_id'), ex_copy: $('input[type=number][name=numCopy]').val(), tid: top_id, at: a_type }),
-            dataType: 'json',
-            contentType: 'application/json;charset=utf-8',
-            success: function (data) {
-                $('#show_question > tbody').empty();
-                if ($(data.d).length == 0) {
-                    $('#show_question > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: 5 }).addClass('text-center')));
-                } else {
-                    $(data.d).each(function (i, q) {
-                        if (q.topic_id == top_id && q.ans_type == a_type) {
-                            var btn_info = $('<button>').addClass('btn btn-info').append('<i class="fa fa-info"></i>').click(function () {
-                                mod = 2;
-                                $('#lbl_quest').text(q.question_text);
-                                if (q.question_img != null) {
-                                    $('.pre_quest_img').prop({ src: q.question_img }).removeClass('d-none');
-                                } else {
-                                    $('.pre_quest_img').addClass('d-none');
-                                }
-                                if (q.ans_type == 0) {
-                                    var tmp = q.choice1.split(".");
-                                    tmp = tmp[(tmp.length - 1)];
-                                    if (tmp == 'jpg' || tmp == 'jpeg' || tmp == 'png' || tmp == 'gif') {
-                                        $('.ans_txt').addClass('d-none');
-                                        $('.ans_img').removeClass('d-none');
-                                        $($('.pre_ans_img')[0]).attr('src', q.choice1);
-                                        $($('.pre_ans_img')[1]).attr('src', q.choice2);
-                                        $($('.pre_ans_img')[2]).attr('src', q.choice3);
-                                        $($('.pre_ans_img')[3]).attr('src', q.choice4);
-                                        $($('.pre_ans_img')[4]).attr('src', q.choice5);
-                                    } else {
-                                        $('.ans_txt').removeClass('d-none');
-                                        $('.ans_img').addClass('d-none');
-                                        $($('input[type=text][name=choice]')[0]).val(q.choice1);
-                                        $($('input[type=text][name=choice]')[1]).val(q.choice2);
-                                        $($('input[type=text][name=choice]')[2]).val(q.choice3);
-                                        $($('input[type=text][name=choice]')[3]).val(q.choice4);
-                                        $($('input[type=text][name=choice]')[4]).val(q.choice5);
+                            $('#modal_question').modal('show');
+                        });
+                        var btn_del = $('<button>').addClass('btn btn-danger').append('<i class="fa fa-trash"></i>').click(function () {
+                            $.confirm({
+                                title: 'ยืนยัน!',
+                                content: 'ท่านต้องการจะนำ ข้อสอบข้อนี้ ออกจากชุดข้อสอบชุดนี้หรือไม่!',
+                                buttons: {
+                                    'ยืนยัน': function () {
+                                        delQuestionInExam(q.exam_detail_id);
+                                    },
+                                    'ยกเลิก': function () {
                                     }
-                                    $('#lbl_ans_choice').text(q.ans_choice);
-                                } else {
-                                    //อัตนัย
                                 }
-                                $('#lbl_bloom').text(bloomMap[q.bloom]);
-                                $('#lbl_score').text(q.score);
-                                $('#modal_question').modal('show');
                             });
-                            var btn_del = $('<button>').addClass('btn btn-danger').append('<i class="fa fa-trash"></i>').click(function () {
-                                $.confirm({
-                                    title: 'ยืนยัน!',
-                                    content: 'ท่านต้องการจะนำ ข้อสอบข้อนี้ ออกจากชุดข้อสอบชุดนี้หรือไม่!',
-                                    buttons: {
-                                        'ยืนยัน': function () {
-                                            delQuestionInExam(q.exam_detail_id);
-                                        },
-                                        'ยกเลิก': function () {
-                                        }
-                                    }
-                                });
-                            });
-                            $('#show_question > tbody').append($('<tr>').append($('<td>', { text: q.question_text }), $('<td>', { text: (q.p_value == 0) ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == 0) ? 'N/A' : q.r_value }), $('<td>').append(btn_info), $('<td>').append(btn_del)));
-                        }
-                    });
-                    //$('#show_question').paging();
-                    $('#show_question.display').DataTable({
-                        "language": {
-                            "url": "/language/Thai.json"
-                        }
-                    });
-                }
+                        });
+                        $('#show_question > tbody').append($('<tr>').append($('<td>', { text: q.question_text }), $('<td>', { text: (q.p_value == 0) ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == 0) ? 'N/A' : q.r_value }), $('<td>').append(btn_info), $('<td>').append(btn_del)));
+                    }
+                });
+                //$('#show_question').paging();
+                $('#show_question.display').DataTable({
+                    "language": {
+                        "url": "language/Thai.json"
+                    }
+                });
 
             }
         });

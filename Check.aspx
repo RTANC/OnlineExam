@@ -44,9 +44,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center" colspan="6">ไม่มีข้อมูลในระบบ</td>
-                </tr>
             </tbody>
         </table>
     </div>

@@ -155,73 +155,70 @@
             success: function (data) {
                 $('#show_student > tbody').empty();
                 var obj = JSON.parse(data.d);
-                if ($(obj).length == 0) {
-                    $('#show_student > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: 7 }).addClass('text-center')));
-                } else {
-                    var gain = parseInt($('#lbl_exam_gain').text()) / 100;
-                    $(obj).each(function (i, stu) {
-                        //var btn_info = $('<button>').addClass('btn btn-info').append($('<i class="fa fa-list-alt"></i>')).click(function () {
-                        //    $.ajax({
-                        //        url: 'Test.aspx/getReportScore',
-                        //        method: 'post',
-                        //        data: JSON.stringify({ ex_id: Cookies.get('ex_id'), stu_id: stu.student_id }),
-                        //        dataType: 'json',
-                        //        contentType: 'application/json;charset=utf-8',
-                        //        success: function (data) {
-                        //            var p = '';
-                        //            var totalScore = 0;
-                        //            $(data.d).each(function (i, report) {
-                        //                p += report.topic_name + ' ' + report.sumScore + ' จาก ' + report.maxScore + ' คะแนน <br />';
-                        //                totalScore += report.sumScore;
-                        //            });
-                        //            $.alert({
-                        //                title: 'ผลสอบอัตนัย!',
-                        //                content: p + 'รวมทั้งหมด ' + totalScore + ' คะแนน'
-                        //            });
-                        //        }
-                        //    });
-                        //});
-                        //var btn_check = $('<button>').addClass('btn btn-warning').append($('<i class="fa fa-check"></i>')).click(function () {
-                        //    getQuestion(Cookies.get('ex_id'), stu.student_id);
-                        //    $('#check_explain').modal('show');
-                        //});
-                        //if (totalQuest == stu.checked) $(btn_check).prop({ disabled: true }).css('cursor', 'not-allowed');
-                        var fullName = '';
-                        if (stu.student_type == 1) {
-                            fullName = 'นรพ.&emsp;' + stu.student_fname + '&emsp;&emsp;&emsp;&emsp;&emsp;' + stu.student_lname;
-                        } else if (stu.student_type == 2) {
-                            fullName = 'นรช.&emsp;' + stu.student_fname + '&emsp;&emsp;&emsp;&emsp;&emsp;' + stu.student_lname;
-                        } else if (stu.student_type == 3) {
-                            fullName = 'นทน.&emsp;' + stu.student_fname + '&emsp;&emsp;&emsp;&emsp;&emsp;' + stu.student_lname;
-                        }
-                        var row = $('<tr>').append($('<td>', { text: stu.student_id }).addClass('text-center'), $('<td>', { html: fullName }));
-                        for (var i = 0; i < fullScore.length; i++) {
-                            var p = stu[fullScore[i].topic_name];
-                            var td = $('<td>', { text: p }).addClass('text-center w-25');
-                            (p < (fullScore[i].fullScore * gain)) ? td.addClass('text-danger') : td;
-                            $(row).append(td);
-                        }
-                        if (stu.examinee_check == 0) $(row).addClass('alert alert-danger');
-                        $('#show_student > tbody').append(row);
-                    });
-                    //$('#show_student').paging();
-                    $('#show_student.display').DataTable({
-                        "language": {
-                            "url": "/language/Thai.json"
-                        }
-                    });
-                    var ExportButtons = document.getElementById('show_student');
-                    var instance = new TableExport(ExportButtons, {
-                        formats: ['xlsx'],
-                        exportButtons: false,
-                        filename: 'รายงานคะแนนสอบ'
-                    });
-                    //                                        // "id" of selector    // format
-                    var exportData = instance.getExportData()['show_student']['xlsx'];
-                    $('#btn_ReportScore').removeClass('d-none').click(function () {
-                        instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
-                    });
-                }
+                var gain = parseInt($('#lbl_exam_gain').text()) / 100;
+                $(obj).each(function (i, stu) {
+                    //var btn_info = $('<button>').addClass('btn btn-info').append($('<i class="fa fa-list-alt"></i>')).click(function () {
+                    //    $.ajax({
+                    //        url: 'Test.aspx/getReportScore',
+                    //        method: 'post',
+                    //        data: JSON.stringify({ ex_id: Cookies.get('ex_id'), stu_id: stu.student_id }),
+                    //        dataType: 'json',
+                    //        contentType: 'application/json;charset=utf-8',
+                    //        success: function (data) {
+                    //            var p = '';
+                    //            var totalScore = 0;
+                    //            $(data.d).each(function (i, report) {
+                    //                p += report.topic_name + ' ' + report.sumScore + ' จาก ' + report.maxScore + ' คะแนน <br />';
+                    //                totalScore += report.sumScore;
+                    //            });
+                    //            $.alert({
+                    //                title: 'ผลสอบอัตนัย!',
+                    //                content: p + 'รวมทั้งหมด ' + totalScore + ' คะแนน'
+                    //            });
+                    //        }
+                    //    });
+                    //});
+                    //var btn_check = $('<button>').addClass('btn btn-warning').append($('<i class="fa fa-check"></i>')).click(function () {
+                    //    getQuestion(Cookies.get('ex_id'), stu.student_id);
+                    //    $('#check_explain').modal('show');
+                    //});
+                    //if (totalQuest == stu.checked) $(btn_check).prop({ disabled: true }).css('cursor', 'not-allowed');
+                    var fullName = '';
+                    if (stu.student_type == 1) {
+                        fullName = 'นรพ.&emsp;' + stu.student_fname + '&emsp;&emsp;&emsp;&emsp;&emsp;' + stu.student_lname;
+                    } else if (stu.student_type == 2) {
+                        fullName = 'นรช.&emsp;' + stu.student_fname + '&emsp;&emsp;&emsp;&emsp;&emsp;' + stu.student_lname;
+                    } else if (stu.student_type == 3) {
+                        fullName = 'นทน.&emsp;' + stu.student_fname + '&emsp;&emsp;&emsp;&emsp;&emsp;' + stu.student_lname;
+                    }
+                    var row = $('<tr>').append($('<td>', { text: stu.student_id }).addClass('text-center'), $('<td>', { html: fullName }));
+                    for (var i = 0; i < fullScore.length; i++) {
+                        var p = stu[fullScore[i].topic_name];
+                        var td = $('<td>', { text: p }).addClass('text-center w-25');
+                        (p < (fullScore[i].fullScore * gain)) ? td.addClass('text-danger') : td;
+                        $(row).append(td);
+                    }
+                    if (stu.examinee_check == 0) $(row).addClass('alert alert-danger');
+                    $('#show_student > tbody').append(row);
+                });
+                //$('#show_student').paging();
+                $('#show_student.display').DataTable({
+                    "language": {
+                        "url": "language/Thai.json"
+                    }
+                });
+                var ExportButtons = document.getElementById('show_student');
+                var instance = new TableExport(ExportButtons, {
+                    formats: ['xlsx'],
+                    exportButtons: false,
+                    filename: 'รายงานคะแนนสอบ'
+                });
+                //                                        // "id" of selector    // format
+                var exportData = instance.getExportData()['show_student']['xlsx'];
+                $('#btn_ReportScore').removeClass('d-none').click(function () {
+                    instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
+                });
+
             }
         });
     }
@@ -311,6 +308,7 @@
                         $('#show_analysis > tbody').append(row);
                     });
                 }
+<<<<<<< HEAD
                 //$('#show_analysis').paging();    
                 var tbl = $('#show_analysis').DataTable({
                     'rowsGroup': [0],
@@ -318,6 +316,9 @@
                         "url": "/language/Thai.json"
                     }
                 }).order([0,'desc']);
+=======
+                $('#show_analysis').paging();
+>>>>>>> 9519390b1ea6436d9337217ce828ce856bc96ac3
             }
         });
     }

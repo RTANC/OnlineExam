@@ -226,7 +226,7 @@ $(document).ready(function () {
             success: function (data) {
                 if ($(data.d).length == 0) {
                     $('#show_quest > tbody').empty();
-                    $('#show_quest > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: '5' }).addClass('text-center')));
+                    //$('#show_quest > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: '5' }).addClass('text-center')));
                     jc.close();
                     $.confirm({
                         title: 'แจ้งเตือน!',
@@ -263,74 +263,71 @@ $(document).ready(function () {
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 $('#show_quest > tbody').empty();
-                if ($(data.d).length == 0) {
-                    $('#show_quest > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: '5' }).addClass('text-center')));
-                } else {
-                    $(data.d).each(function (i, q) {
-                        var btn_edit = $('<button>').addClass('btn btn-warning').append('<i class="fa fa-pencil"></i>').click(function () {
-                            mod = 2;
-                            quest.question_id = q.question_id;
-                            $("#txt_question").val(q.question_text);
-                            if (q.question_img != null) {
-                                $('#pre_quest_img').attr('src', q.question_img).removeClass('d-none');
-                                $('#clear_quest_img').removeClass('d-none');
-                                quest.question_img = '';
-                            } else {
-                                $('#pre_quest_img').addClass('d-none');
-                                $('#clear_quest_img').addClass('d-none');
-                            }
-                            if (q.ans_type == 0) {
-                                var tmp = q.choice1.split(".");
-                                tmp = tmp[(tmp.length - 1)];
-                                if (tmp == 'jpg' || tmp == 'jpeg' || tmp == 'png' || tmp == 'gif') {
-                                    $('input[type=text][name=choice]').prop({ disabled: true }).val('');
-                                    $('div.div-img-choice').removeClass('d-none');
-                                    $('div.div-txt-choice').addClass('d-none');
-                                    $($('.pre_ans_img')[0]).attr('src', q.choice1);
-                                    $($('.pre_ans_img')[1]).attr('src', q.choice2);
-                                    $($('.pre_ans_img')[2]).attr('src', q.choice3);
-                                    $($('.pre_ans_img')[3]).attr('src', q.choice4);
-                                    $($('.pre_ans_img')[4]).attr('src', q.choice5);
-                                    $('button[name=clear_img]').removeClass('d-none');
-                                } else {
-                                    $('div.div-img-choice').addClass('d-none');
-                                    $('div.div-txt-choice').removeClass('d-none');
-                                    $('input[type=text][name=choice]').prop({ disabled: false });
-                                    $($('input[type=text][name=choice]')[0]).val(q.choice1);
-                                    $($('input[type=text][name=choice]')[1]).val(q.choice2);
-                                    $($('input[type=text][name=choice]')[2]).val(q.choice3);
-                                    $($('input[type=text][name=choice]')[3]).val(q.choice4);
-                                    $($('input[type=text][name=choice]')[4]).val(q.choice5);
-                                }
-                                $('input[type=radio][name=ans_choice][value=' + q.ans_choice + ']').prop({ checked: true });
-                            } else {
-                                //ข้อสอบอัตนัย
-                            }
-                            $('#select_bloom > option[value=' + q.bloom + ']').prop({ selected: true });
-                            $('#num_score').val(q.score);
-                            quest.score = q.score;
-                            $('#quest_detail').modal('show');
-
-                        });
-
-                        var btn_del = $('<button>').addClass('btn btn-danger').append('<i class="fa fa-eraser"></i>').click(function () {
-                            delQuestion(q);
-                        });
-
-                        var row = $('<tr>').append($('<td>', { text: q.question_text }), $('<td>', { text: (q.p_value == '-1') ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == '-1') ? 'N/A' : q.r_value }), $('<td>').append(btn_edit), $('<td>').append(btn_del));
-
-                        $('#show_quest > tbody').append(row);
-                    });
-                    $('#show_quest').DataTable({
-                        "language": {
-                            "url": "/language/Thai.json"
+                $(data.d).each(function (i, q) {
+                    var btn_edit = $('<button>').addClass('btn btn-warning').append('<i class="fa fa-pencil"></i>').click(function () {
+                        mod = 2;
+                        quest.question_id = q.question_id;
+                        $("#txt_question").val(q.question_text);
+                        if (q.question_img != null) {
+                            $('#pre_quest_img').attr('src', q.question_img).removeClass('d-none');
+                            $('#clear_quest_img').removeClass('d-none');
+                            quest.question_img = '';
+                        } else {
+                            $('#pre_quest_img').addClass('d-none');
+                            $('#clear_quest_img').addClass('d-none');
                         }
+                        if (q.ans_type == 0) {
+                            var tmp = q.choice1.split(".");
+                            tmp = tmp[(tmp.length - 1)];
+                            if (tmp == 'jpg' || tmp == 'jpeg' || tmp == 'png' || tmp == 'gif') {
+                                $('input[type=text][name=choice]').prop({ disabled: true }).val('');
+                                $('div.div-img-choice').removeClass('d-none');
+                                $('div.div-txt-choice').addClass('d-none');
+                                $($('.pre_ans_img')[0]).attr('src', q.choice1);
+                                $($('.pre_ans_img')[1]).attr('src', q.choice2);
+                                $($('.pre_ans_img')[2]).attr('src', q.choice3);
+                                $($('.pre_ans_img')[3]).attr('src', q.choice4);
+                                $($('.pre_ans_img')[4]).attr('src', q.choice5);
+                                $('button[name=clear_img]').removeClass('d-none');
+                            } else {
+                                $('div.div-img-choice').addClass('d-none');
+                                $('div.div-txt-choice').removeClass('d-none');
+                                $('input[type=text][name=choice]').prop({ disabled: false });
+                                $($('input[type=text][name=choice]')[0]).val(q.choice1);
+                                $($('input[type=text][name=choice]')[1]).val(q.choice2);
+                                $($('input[type=text][name=choice]')[2]).val(q.choice3);
+                                $($('input[type=text][name=choice]')[3]).val(q.choice4);
+                                $($('input[type=text][name=choice]')[4]).val(q.choice5);
+                            }
+                            $('input[type=radio][name=ans_choice][value=' + q.ans_choice + ']').prop({ checked: true });
+                        } else {
+                            //ข้อสอบอัตนัย
+                        }
+                        $('#select_bloom > option[value=' + q.bloom + ']').prop({ selected: true });
+                        $('#num_score').val(q.score);
+                        quest.score = q.score;
+                        $('#quest_detail').modal('show');
+
                     });
-                }
+
+                    var btn_del = $('<button>').addClass('btn btn-danger').append('<i class="fa fa-eraser"></i>').click(function () {
+                        delQuestion(q);
+                    });
+
+                    var row = $('<tr>').append($('<td>', { text: q.question_text }), $('<td>', { text: (q.p_value == '-1') ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == '-1') ? 'N/A' : q.r_value }), $('<td>').append(btn_edit), $('<td>').append(btn_del));
+
+                    $('#show_quest > tbody').append(row);
+                });
+                $('#show_quest').DataTable({
+                    "language": {
+                        "url": "language/Thai.json"
+                    }
+                });
+
             },
             error: function () {
                 $('#show_quest > tbody').empty();
-                $('#show_quest > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: '5' }).addClass('text-center')));
+                //$('#show_quest > tbody').append($('<tr>').append($('<td>', { text: 'ไม่มีข้อมูลในระบบ', colspan: '5' }).addClass('text-center')));
                 $.confirm({
                     title: 'Error!',
                     content: 'โหลดข้อมูลล้มเหลว!',
