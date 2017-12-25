@@ -68,6 +68,7 @@
     <script src="js/tableexport.min.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/dataTables.bootstrap4.min.js"></script>
+    <script src="js/dataTables.rowsGroup.js"></script>
     <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
     </asp:ContentPlaceHolder>
 </body>

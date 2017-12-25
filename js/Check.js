@@ -292,24 +292,32 @@
                 $('#show_analysis > tbody').empty();
                 if ($(data.d).length == 0) {
                     $('#btn_exam_analysis').removeClass('d-none');
-                    $('#show_analysis > tbody').append('<tr><td class="text-center" colspan= "8">ไม่มีข้อมูลในระบบ</td></tr>');
+                    //$('#show_analysis > tbody').append('<tr><td class="text-center" colspan= "8">ไม่มีข้อมูลในระบบ</td></tr>');
                 } else {
                     $('#btn_exam_analysis').addClass('d-none');
                     $(data.d).each(function (i, ea) {
-                        var row = $('<tr>');
-                        if (((i + 1) % 5) == 1) {
-                            $(row).append($('<td>', { rowspan: 5 }).addClass('text-center').append($('<a>', { text: ea.question_id, href: '#!' }).addClass('btn btn-link').click(function () {
-                                questionMoreDetail($(this).text());
-                            })));
-                        }
-                        $(row).append($('<td>', { text: ea.choice }).addClass('text-center'), $('<td>', { text: ea.h }).addClass('text-center'), $('<td>', { text: ea.l }).addClass('text-center'), $('<td>', { text: ea.ph }).addClass('text-center'), $('<td>', { text: ea.pl }).addClass('text-center'), $('<td>', { text: ea.p }).addClass('text-center'), $('<td>', { text: ea.r }).addClass('text-center'));
+                        var row = $('<tr>').append($('<td>').addClass('text-center').append($('<a>', { text: ea.question_id, href: '#!' }).addClass('btn btn-link').click(function () {
+                            questionMoreDetail($(this).text());
+                        })), $('<td>', { text: ea.choice }).addClass('text-center'), $('<td>', { text: ea.h }).addClass('text-center'), $('<td>', { text: ea.l }).addClass('text-center'), $('<td>', { text: ea.ph }).addClass('text-center'), $('<td>', { text: ea.pl }).addClass('text-center'), $('<td>', { text: ea.p }).addClass('text-center'), $('<td>', { text: ea.r }).addClass('text-center'));
+                        //if (((i + 1) % 5) == 1) {
+                        //    $(row).append($('<td>', { rowspan: 5 }).addClass('text-center').append($('<a>', { text: ea.question_id, href: '#!' }).addClass('btn btn-link').click(function () {
+                        //        questionMoreDetail($(this).text());
+                        //    })));
+                        //}
+                        //$(row).append($('<td>', { text: ea.choice }).addClass('text-center'), $('<td>', { text: ea.h }).addClass('text-center'), $('<td>', { text: ea.l }).addClass('text-center'), $('<td>', { text: ea.ph }).addClass('text-center'), $('<td>', { text: ea.pl }).addClass('text-center'), $('<td>', { text: ea.p }).addClass('text-center'), $('<td>', { text: ea.r }).addClass('text-center'));
                         if (ea.key_choice == '1') {
                             $(row).find('td[rowspan!=5]').addClass('table-success');
                         }
                         $('#show_analysis > tbody').append(row);
-                    });                   
+                    });
                 }
-                $('#show_analysis').paging();               
+                //$('#show_analysis').paging();    
+                var tbl = $('#show_analysis').DataTable({
+                    'rowsGroup': [0],
+                    "language": {
+                        "url": "/language/Thai.json"
+                    }
+                }).order([0,'desc']);
             }
         });
     }
