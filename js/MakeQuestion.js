@@ -319,6 +319,7 @@ $(document).ready(function () {
                     $('#show_quest > tbody').append(row);
                 });
                 $('#show_quest').DataTable({
+                    retrieve: true,
                     "language": {
                         "url": "language/Thai.json"
                     }

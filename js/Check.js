@@ -203,6 +203,7 @@
                 });
                 //$('#show_student').paging();
                 $('#show_student.display').DataTable({
+                    retrieve: true,
                     "language": {
                         "url": "language/Thai.json"
                     }
@@ -311,10 +312,11 @@
                 //$('#show_analysis').paging();    
                 var tbl = $('#show_analysis').DataTable({
                     'rowsGroup': [0],
+                    retrieve: true,
                     "language": {
                         "url": "language/Thai.json"
                     }
-                }).order([0,'desc']);
+                }).order([0, 'desc']);
             }
         });
     }

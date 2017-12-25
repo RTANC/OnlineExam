@@ -11,11 +11,18 @@
         content: 'กำลังโหลด!'
     });
 
+    
     $(document).ajaxStart(function () {
         jc.open();
     });
 
     $(document).ajaxStop(function () {
+        $('table').DataTable({
+            retrieve: true,
+            "language": {
+                "url": "language/Thai.json"
+            }
+        });
         jc.close();
     });
 
@@ -38,7 +45,7 @@
             }
         });
     });
-
+    
     getExam();
     getExaminee();
 
@@ -158,12 +165,6 @@
                         fullName = 'นทน.&emsp;' + stu.student_fname + '&emsp;&emsp;&emsp;&emsp;&emsp;' + stu.student_lname;
                     }
                     $('#show_student > tbody').append($('<tr>').append($('<td>', { text: stu.student_id }).addClass('text-center'), $('<td>', { html: fullName }), $('<td>', { text: stu.examinee_passwd }).addClass('text-center'), $('<td>').append(btn_del).addClass('text-center')));
-                });
-                //$('#show_student').paging();
-                $('#show_student.display').DataTable({
-                    "language": {
-                        "url": "language/Thai.json"
-                    }
                 });
             }
         });
@@ -295,13 +296,6 @@
                     var row = $('<tr>').append(colQuestTxt, $('<td>', { text: (q.p_value == '') ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == '') ? 'N/A' : q.r_value }), $('<td>').addClass('text-center').append(ckBox));
                     $('#show_select_question > tbody').append(row);
                 });
-                //$('#show_select_question').paging();
-                $('#show_select_question.display').DataTable({
-                    "language": {
-                        "url": "language/Thai.json"
-                    }
-                });
-
             },
             error: function () {
                 $('#show_select_question > tbody').empty();
@@ -375,13 +369,6 @@
                         $('#show_question > tbody').append($('<tr>').append($('<td>', { text: q.question_text }), $('<td>', { text: (q.p_value == 0) ? 'N/A' : q.p_value }), $('<td>', { text: (q.r_value == 0) ? 'N/A' : q.r_value }), $('<td>').append(btn_info), $('<td>').append(btn_del)));
                     }
                 });
-                //$('#show_question').paging();
-                $('#show_question.display').DataTable({
-                    "language": {
-                        "url": "language/Thai.json"
-                    }
-                });
-
             }
         });
     }

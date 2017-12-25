@@ -106,6 +106,7 @@
                 });
                 //$('#show_subject').paging();
                 $('#show_subject').DataTable({
+                    retrieve: true,
                     "language": {
                         "url": "language/Thai.json"
                     }
