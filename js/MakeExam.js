@@ -425,12 +425,12 @@
         $('input[type=checkbox][name=quest_checkAll]').prop({ checked: false });
         if (mod == 1) {//เพิ่มโจทย์
             getQuestion();
-            $('#show_select_question').removeClass('d-none');
+            $('.quest_select').removeClass('d-none');
             $('.quest_detail').addClass('d-none');
             $('#btn_addSelectQuest,#btn_cancalSelectQuest').removeClass('d-none');
             $('#exampleModalLabel').text('เลือกโจทย์');
         } else if (mod == 2) {//ดูข้อมูลโจทย์
-            $('#show_select_question').addClass('d-none');
+            $('.quest_select').addClass('d-none');
             $('.quest_detail').removeClass('d-none');
             $('#btn_addSelectQuest,#btn_cancalSelectQuest').addClass('d-none');
             $('#exampleModalLabel').text('ข้อมูลโจทย์');

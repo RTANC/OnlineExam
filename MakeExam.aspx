@@ -99,7 +99,7 @@
             <div class="col-2">
                 <div class="input-group">
                     <span class="input-group-addon">ชุดข้อสอบ</span>
-                    <input name="numCopy" class="form-control w-100" type="number" min="1" max="255" value="1"/>
+                    <input name="numCopy" class="form-control w-100" type="number" min="1" max="255" value="1" />
                 </div>
             </div>
             <div class="col-4">
@@ -144,7 +144,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                     <tfoot>
                         <tr>
@@ -170,20 +169,22 @@
                         </button>
                     </div>
                     <div class="modal-body container-fluid">
-                        <div class="row">
-                            <div class="col">
-                                <table id="show_select_question" class="table table-hover mt-3 table-bordered display" cellspacing="0">
-                                    <thead class="table-inverse">
-                                        <tr>
-                                            <th class="text-center w-100">โจทย์</th>
-                                            <th class="text-center">P</th>
-                                            <th class="text-center">R</th>
-                                            <th class="text-center">เลือก<input type="checkbox" name="quest_checkAll"/></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                        <div class="quest_select">
+                            <div class="row">
+                                <div class="col">
+                                    <table id="show_select_question" class="table table-hover mt-3 table-bordered display" cellspacing="0">
+                                        <thead class="table-inverse">
+                                            <tr>
+                                                <th class="text-center w-100">โจทย์</th>
+                                                <th class="text-center">P</th>
+                                                <th class="text-center">R</th>
+                                                <th class="text-center">เลือก<input type="checkbox" name="quest_checkAll" /></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="quest_detail">

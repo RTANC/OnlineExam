@@ -315,7 +315,7 @@ $(document).ready(function () {
 
                     });
 
-                    var btn_del = $('<button>').addClass('btn btn-danger').append('<i class="fa fa-eraser"></i>').click(function () {
+                    var btn_del = $('<button>').addClass('btn btn-danger').append('<i class="fa fa-trash"></i>').click(function () {
                         delQuestion(q);
                     });
 

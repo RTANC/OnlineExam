@@ -200,10 +200,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button id="btn_addSelectQuest" type="button" class="btn btn-primary">ยืนยัน</button>
-                        <button id="btn_cancalSelectQuest" type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                    </div>
                 </div>
             </div>
         </div>
