@@ -360,8 +360,8 @@ $(document).ready(function () {
         quest.ans_type = $('input[name=ans_type]:checked').val();
         quest.question_text = $('#txt_question').val();
         quest.question_img = '';
-        if (quest.ans_type == 0) {
-            var valid = true;
+        var valid = true;
+        if (quest.ans_type == 0) {           
             if ($('input[type=text][name=choice]:disabled').length == 5) {
                 var ans_i = $('input[type=file][name=ans_img]');
                 var ck = 0 + ($($(ans_i[0]).get(0).files[0]).length) + ($($(ans_i[1]).get(0).files[0]).length) + ($($(ans_i[2]).get(0).files[0]).length) + ($($(ans_i[3]).get(0).files[0]).length) + ($($(ans_i[4]).get(0).files[0]).length);
@@ -419,7 +419,7 @@ $(document).ready(function () {
         quest.score = $('#num_score').val();
         formData.append('mod', mod);
         formData.append('obj', JSON.stringify(quest));
-        $('#quest_detail').modal('hide');
+        if (quest.question_text.length == 0) false;
 
         if (valid) {
             var saving = $.dialog({
@@ -436,6 +436,7 @@ $(document).ready(function () {
                 processData: false,
                 success: function () {
                     formData = new FormData();
+                    $('#quest_detail').modal('hide');
                     loadQuestion();
                 },
                 complete: function () {
