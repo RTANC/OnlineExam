@@ -54,6 +54,7 @@
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-confirm.min.js"></script>
+    <script src="js/js.cookie.js"></script>
     <script src="js/LoginPage.js"></script>
 </body>
 </html>

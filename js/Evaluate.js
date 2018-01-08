@@ -19,6 +19,11 @@
         getSubject();
         tbl_exam.clear().draw();
     });
+    $('#select_exam_copy').change(function () {
+        var exam_id = $('input[type=hidden]').val();
+        //getNumQuest(exam_id);
+        getStatEval(exam_id);
+    });
     function getSubject() {
         $.ajax({
             url: 'Evaluate.aspx/getSubject',
@@ -71,9 +76,27 @@
             }
         });
     }
+
+    function getStatEval(exam_id) {
+        $.ajax({
+            url: 'Evaluate.aspx/getStatEval',
+            method: 'post',
+            data: JSON.stringify({ ex_id: exam_id, ex_copy: $('#select_exam_copy').val() }),
+            dataType: 'json',
+            contentType: conType,
+            success: function (data) {
+                var obj = JSON.parse(data.d);
+                $('#modal_Examinfo > tbody').empty();
+                $(obj).each(function (i, stat) {
+                    $('#show_sumation > tbody').append($('<tr>').append($('<td>', { text: stat.type }), $('<td>', { text: stat.mean }), $('<td>', { text: stat.minimum }), $('<td>', { text: stat.maximum }), $('<td>', { text: stat.sd })));
+                });
+            }
+        });
+    }
     $('#modal_Examinfo').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var exam_id = button.data('exid');
+        $('input[type=hidden]').val(exam_id);
         $.ajax({
             url: 'Check.aspx/getExamCopy',
             method: 'post',
@@ -88,6 +111,7 @@
                         $('#select_exam_copy').append($('<option>', { text: ex_copy, value: ex_copy }));
                     });
                     getNumQuest(exam_id);
+                    getStatEval(exam_id);
                 } else {
                     $('#numQuest').text('N/A');
                 }

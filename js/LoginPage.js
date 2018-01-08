@@ -23,7 +23,12 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data.d == 1) {
-                    window.location.replace("./MakeQuestion.aspx");
+                    var cook = Cookies.get('myCookies').split('=');
+                    if (cook[2] == 8) {
+                        window.location.replace("./Evaluate.aspx");
+                    } else {
+                        window.location.replace("./MakeQuestion.aspx");
+                    }                                      
                 } else if (data.d == 2) {
                     window.location.replace("ChangePasswd.aspx");
                 } else {

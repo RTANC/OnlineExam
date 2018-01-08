@@ -51,4 +51,19 @@ Partial Class Evaluate
         con.Close()
         Return JsonConvert.SerializeObject(dt)
     End Function
+
+    <WebMethod> Public Shared Function getStatEval(ByVal ex_id As Integer, ByVal ex_copy As Byte) As String
+        Dim cs As String = ConfigurationManager.ConnectionStrings("con").ConnectionString
+        Dim con As New SqlConnection(cs)
+        Dim dt As New DataTable
+        Dim cmd As New SqlCommand("spCalStatEval", con)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@ex_id", ex_id)
+        cmd.Parameters.AddWithValue("@ex_copy", ex_copy)
+        con.Open()
+        Dim sda As New SqlDataAdapter(cmd)
+        sda.Fill(dt)
+        con.Close()
+        Return JsonConvert.SerializeObject(dt)
+    End Function
 End Class
