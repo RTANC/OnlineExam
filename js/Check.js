@@ -376,7 +376,7 @@
             method: 'post',
             data: JSON.stringify({ ex_id: Cookies.get('ex_id'), ex_copy: $('#select_exam_copy').val() }),
             dataType: 'json',
-            contentType: conType,
+            contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 var obj = JSON.parse(data.d);
                 $('#show_sumation > tbody').empty();
