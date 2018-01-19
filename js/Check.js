@@ -70,6 +70,7 @@
             success: function () {
                 $('#btn_exam_analysis').addClass('d-none');
                 getExamAnalysis();
+                getStatEval();
             }
         });
     });
