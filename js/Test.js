@@ -232,6 +232,14 @@
             currQuest = ($(this).text()) - 1;
             $(quest).addClass('d-none');
             $(quest).eq(currQuest).removeClass('d-none');
+            if (currQuest == 0) {
+                $('#btn_preQuest').addClass('d-none');
+            } else if (currQuest == (totalQuest - 1)) {
+                $('#btn_nextQuest').addClass('d-none');
+            } else {
+                $('#btn_preQuest').removeClass('d-none');
+                $('#btn_nextQuest').removeClass('d-none');
+            }
         });
         $(quest).eq(0).removeClass('d-none');
         $('#btn_preQuest,#btn_nextQuest').click(function () {
