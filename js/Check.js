@@ -55,6 +55,7 @@
                     $('#select_exam_copy').append($('<option>', { text: ex_copy, value: ex_copy }));
                 });
                 getExamAnalysis();
+                getStatEval();
             }
         }
     });
