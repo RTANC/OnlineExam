@@ -86,7 +86,7 @@
             contentType: conType,
             success: function (data) {
                 var obj = JSON.parse(data.d);
-                $('#modal_Examinfo > tbody').empty();
+                $('#show_sumation > tbody').empty();
                 $(obj).each(function (i, stat) {
                     $('#show_sumation > tbody').append($('<tr>').append($('<td>', { text: stat.type }), $('<td>', { text: stat.mean }), $('<td>', { text: stat.minimum }), $('<td>', { text: stat.maximum }), $('<td>', { text: stat.sd })));
                 });

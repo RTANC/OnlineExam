@@ -76,133 +76,156 @@
             </tbody>
         </table>
     </div>
+    <div class="row">
+        <div class="col">
+            <h3>สรุปค่าสถิติ</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table id="show_sumation" class="table table-striped table-bordered" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Type.</th>
+                        <th>Mean</th>
+                        <th>Min</th>
+                        <th>Max</th>
+                        <th>Stddev</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <%--Modal Show Question Detail--%>
     <div id="modal_question" class="modal fade">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">โจทย์</h5>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body container-fluid">
-                        <div class="quest_detail">
-                            <div class="row">
-                                <div class="col-1">
-                                    <label>โจทย์</label>
-                                </div>
-                                <div class="col">
-                                    <label id="lbl_quest"></label>
-                                </div>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">โจทย์</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body container-fluid">
+                    <div class="quest_detail">
+                        <div class="row">
+                            <div class="col-1">
+                                <label>โจทย์</label>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="col px-5">
-                                        <img class="pre_quest_img img-fluid d-none" src="css/Images/no_image_duplie_default.jpg" />
-                                    </div>
-                                </div>
+                            <div class="col">
+                                <label id="lbl_quest"></label>
                             </div>
-                            <div class="row py-1 pnl_c">
-                                <div class="col-2">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
                                 <div class="col px-5">
-                                    <div class="input-group w-75 ans_txt">
-                                        <span class="input-group-addon">1.</span>
-                                        <input name="choice" class="form-control" type="text" readonly />
-                                    </div>
-                                    <div class="input-group w-75 d-none ans_img">
-                                        <span class="input-group-addon">1.</span>
-                                        <img class="pre_ans_img img-thumbnail" src="css/Images/no_image_duplie_default.jpg" />
-                                    </div>
+                                    <img class="pre_quest_img img-fluid d-none" src="css/Images/no_image_duplie_default.jpg" />
                                 </div>
                             </div>
-                            <div class="row py-1 pnl_c">
-                                <div class="col-2">
+                        </div>
+                        <div class="row py-1 pnl_c">
+                            <div class="col-2">
+                            </div>
+                            <div class="col px-5">
+                                <div class="input-group w-75 ans_txt">
+                                    <span class="input-group-addon">1.</span>
+                                    <input name="choice" class="form-control" type="text" readonly />
                                 </div>
-                                <div class="col px-5">
-                                    <div class="input-group w-75 ans_txt">
-                                        <span class="input-group-addon">2.</span>
-                                        <input name="choice" class="form-control" type="text" readonly />
-                                    </div>
-                                    <div class="input-group w-75 d-none ans_img">
-                                        <span class="input-group-addon">2.</span>
-                                        <img class="pre_ans_img img-thumbnail" src="css/Images/no_image_duplie_default.jpg" />
-                                    </div>
+                                <div class="input-group w-75 d-none ans_img">
+                                    <span class="input-group-addon">1.</span>
+                                    <img class="pre_ans_img img-thumbnail" src="css/Images/no_image_duplie_default.jpg" />
                                 </div>
                             </div>
-                            <div class="row py-1 pnl_c">
-                                <div class="col-2">
+                        </div>
+                        <div class="row py-1 pnl_c">
+                            <div class="col-2">
+                            </div>
+                            <div class="col px-5">
+                                <div class="input-group w-75 ans_txt">
+                                    <span class="input-group-addon">2.</span>
+                                    <input name="choice" class="form-control" type="text" readonly />
                                 </div>
-                                <div class="col px-5">
-                                    <div class="input-group w-75 ans_txt">
-                                        <span class="input-group-addon">3.</span>
-                                        <input name="choice" class="form-control" type="text" readonly />
-                                    </div>
-                                    <div class="input-group w-75 d-none ans_img">
-                                        <span class="input-group-addon">3.</span>
-                                        <img class="pre_ans_img img-thumbnail" src="css/Images/no_image_duplie_default.jpg" />
-                                    </div>
+                                <div class="input-group w-75 d-none ans_img">
+                                    <span class="input-group-addon">2.</span>
+                                    <img class="pre_ans_img img-thumbnail" src="css/Images/no_image_duplie_default.jpg" />
                                 </div>
                             </div>
-                            <div class="row py-1 pnl_c">
-                                <div class="col-2">
+                        </div>
+                        <div class="row py-1 pnl_c">
+                            <div class="col-2">
+                            </div>
+                            <div class="col px-5">
+                                <div class="input-group w-75 ans_txt">
+                                    <span class="input-group-addon">3.</span>
+                                    <input name="choice" class="form-control" type="text" readonly />
                                 </div>
-                                <div class="col px-5">
-                                    <div class="input-group w-75 ans_txt">
-                                        <span class="input-group-addon">4.</span>
-                                        <input name="choice" class="form-control" type="text" readonly />
-                                    </div>
-                                    <div class="input-group w-75 d-none ans_img">
-                                        <span class="input-group-addon">4.</span>
-                                        <img class="pre_ans_img img-thumbnail" src="css/Images/no_image_duplie_default.jpg" />
-                                    </div>
+                                <div class="input-group w-75 d-none ans_img">
+                                    <span class="input-group-addon">3.</span>
+                                    <img class="pre_ans_img img-thumbnail" src="css/Images/no_image_duplie_default.jpg" />
                                 </div>
                             </div>
-                            <div class="row py-1 pnl_c">
-                                <div class="col-2">
+                        </div>
+                        <div class="row py-1 pnl_c">
+                            <div class="col-2">
+                            </div>
+                            <div class="col px-5">
+                                <div class="input-group w-75 ans_txt">
+                                    <span class="input-group-addon">4.</span>
+                                    <input name="choice" class="form-control" type="text" readonly />
                                 </div>
-                                <div class="col px-5">
-                                    <div class="input-group w-75 ans_txt">
-                                        <span class="input-group-addon">5.</span>
-                                        <input name="choice" class="form-control" type="text" readonly />
-                                    </div>
-                                    <div class="input-group w-75 d-none ans_img">
-                                        <span class="input-group-addon">5.</span>
-                                        <img class="pre_ans_img img-thumbnail" src="css/Images/no_image_duplie_default.jpg" />
-                                    </div>
+                                <div class="input-group w-75 d-none ans_img">
+                                    <span class="input-group-addon">4.</span>
+                                    <img class="pre_ans_img img-thumbnail" src="css/Images/no_image_duplie_default.jpg" />
                                 </div>
                             </div>
-                            <div class="row py-1 pnl_c">
-                                <div class="col-2">
-                                    <label>คำตอบ</label>
+                        </div>
+                        <div class="row py-1 pnl_c">
+                            <div class="col-2">
+                            </div>
+                            <div class="col px-5">
+                                <div class="input-group w-75 ans_txt">
+                                    <span class="input-group-addon">5.</span>
+                                    <input name="choice" class="form-control" type="text" readonly />
                                 </div>
-                                <div class="col-2">
-                                    <label id="lbl_ans_choice"></label>
+                                <div class="input-group w-75 d-none ans_img">
+                                    <span class="input-group-addon">5.</span>
+                                    <img class="pre_ans_img img-thumbnail" src="css/Images/no_image_duplie_default.jpg" />
                                 </div>
                             </div>
-                            <div class="row py-1">
-                                <div class="col-2">
-                                    <label>Bloom taxonomy</label>
-                                </div>
-                                <div class="col-5">
-                                    <label id="lbl_bloom"></label>
-                                </div>
+                        </div>
+                        <div class="row py-1 pnl_c">
+                            <div class="col-2">
+                                <label>คำตอบ</label>
                             </div>
-                            <div class="row py-1">
-                                <div class="col-2">
-                                    <label>คะแนน</label>
-                                </div>
-                                <div class="col-2">
-                                    <label id="lbl_score"></label>
-                                </div>
+                            <div class="col-2">
+                                <label id="lbl_ans_choice"></label>
+                            </div>
+                        </div>
+                        <div class="row py-1">
+                            <div class="col-2">
+                                <label>Bloom taxonomy</label>
+                            </div>
+                            <div class="col-5">
+                                <label id="lbl_bloom"></label>
+                            </div>
+                        </div>
+                        <div class="row py-1">
+                            <div class="col-2">
+                                <label>คะแนน</label>
+                            </div>
+                            <div class="col-2">
+                                <label id="lbl_score"></label>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
     <!-- Modal Explain-->
     <div class="modal fade" id="check_explain" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

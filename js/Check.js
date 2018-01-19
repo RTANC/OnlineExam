@@ -34,6 +34,7 @@
     //getTotalScore();
     $('#select_exam_copy').change(function () {
         getExamAnalysis();
+        getStatEval();
     });
 
     $('#btn_gotoSchedule').click(function () {
@@ -364,6 +365,26 @@
                     $('#lbl_score').text(q.score);
                     $('#modal_question').modal('show');
                 });
+            }
+        });
+    }
+
+    function getStatEval() {
+        $.ajax({
+            url: 'Evaluate.aspx/getStatEval',
+            method: 'post',
+            data: JSON.stringify({ ex_id: Cookies.get('ex_id'), ex_copy: $('#select_exam_copy').val() }),
+            dataType: 'json',
+            contentType: conType,
+            success: function (data) {
+                var obj = JSON.parse(data.d);
+                $('#show_sumation > tbody').empty();
+                $(obj).each(function (i, stat) {
+                    $('#show_sumation > tbody').append($('<tr>').append($('<td>', { text: stat.type }), $('<td>', { text: stat.mean }), $('<td>', { text: stat.minimum }), $('<td>', { text: stat.maximum }), $('<td>', { text: stat.sd })));
+                });
+                if ($(obj).length == 0) {
+                    $('#show_sumation > tbody').append('<tr><td colspan="5" class="text-center">ไม่มีข้อมูลที่จะแสดง</td></tr>');
+                }
             }
         });
     }
