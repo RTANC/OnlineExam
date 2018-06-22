@@ -26,7 +26,7 @@
         } else if (obj.student_type == 2) {
             fullName = 'นรช.&nbsp;' + obj.student_fname + '&emsp;' + obj.student_lname;
         } else if (obj.student_type == 3) {
-            fullName = 'นทน.&nbsp;' + obj.student_fname + '&emsp;' + obj.student_lname;
+            fullName = obj.student_fname + '&emsp;' + obj.student_lname;
         }
         $('#lbl_stu_name').html(fullName);
         $('#lbl_year').text(obj.year);
