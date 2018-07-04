@@ -35,6 +35,7 @@
     $('#select_exam_copy').change(function () {
         getExamAnalysis();
         getStatEval();
+        getKr();
     });
 
     $('#btn_gotoSchedule').click(function () {
@@ -54,6 +55,7 @@
                 $(data.d).each(function (i, ex_copy) {
                     $('#select_exam_copy').append($('<option>', { text: ex_copy, value: ex_copy }));
                 });
+                getKr()
                 getExamAnalysis();
                 getStatEval();
             }
@@ -119,6 +121,25 @@
             url: 'MakeExam.aspx/getExam',
             method: 'post',
             data: JSON.stringify({ ex_id: Cookies.get('ex_id') }),
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                var exam = $(data.d)[0];
+                $('#lbl_year').text(exam.year);
+                $('#lbl_term').text((exam.term > 2) ? 'ภาคฤดูร้อน' : 'ภาคการศึกษาที่ ' + exam.term);
+                $('#lbl_subject').text(exam.subject_name);
+                $('#lbl_date').text(moment(exam.exam_start_time).format('DD/MM/YYYY'));
+                $('#lbl_time').text(moment(exam.exam_start_time).format('HH:mm') + ' ถึง ' + moment(exam.exam_end_time).format('HH:mm'));
+                $('#lbl_exam_gain').text(exam.exam_gain);
+            }
+        });
+    }
+
+    function getKr() {
+        $.ajax({
+            url: 'MakeExam.aspx/getKr',
+            method: 'post',
+            data: JSON.stringify({ ex_id: Cookies.get('ex_id'), ex_copy: $('#select_exam_copy option:selected').val()}),
             dataType: 'json',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {

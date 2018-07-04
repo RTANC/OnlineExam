@@ -43,6 +43,19 @@ Partial Class Check
         Return ListOfFullScore
     End Function
 
+    <WebMethod> Public Shared Function getKr(ByVal ex_id As Integer, ByVal ex_copy As Integer) As Single
+        Dim cs As String = ConfigurationManager.ConnectionStrings("con").ConnectionString
+        Dim con As New SqlConnection(cs)
+        con.Close()
+        Dim cmd As New SqlCommand("spGetFullScore", con)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@ex_id", ex_id)
+        con.Open()
+        Dim kr = cmd.ExecuteScalar
+        con.Close()
+        Return kr
+    End Function
+
     '<WebMethod> Public Shared Function getTotalQuest(ByVal ex_id As Integer) As Integer
     '    Dim cs As String = ConfigurationManager.ConnectionStrings("con").ConnectionString
     '    Dim con As New SqlConnection(cs)

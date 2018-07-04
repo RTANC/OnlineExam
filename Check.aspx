@@ -54,6 +54,9 @@
                 <select id="select_exam_copy" class="custom-select w-50"></select>
             </div>
         </div>
+        <div class="col-2">
+            <label>kr&nbsp;:&nbsp;</label><label id="lbl_exam_kr" class="font-weight-bold">&nbsp;</label>
+        </div>
         <div class="col-3">
             <button id="btn_exam_analysis" class="btn btn-primary d-none">วิเคราะห์ข้อสอบ</button>
         </div>
