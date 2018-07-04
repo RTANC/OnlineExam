@@ -47,9 +47,10 @@ Partial Class Check
         Dim cs As String = ConfigurationManager.ConnectionStrings("con").ConnectionString
         Dim con As New SqlConnection(cs)
         con.Close()
-        Dim cmd As New SqlCommand("spGetFullScore", con)
+        Dim cmd As New SqlCommand("spGetKr", con)
         cmd.CommandType = CommandType.StoredProcedure
         cmd.Parameters.AddWithValue("@ex_id", ex_id)
+        cmd.Parameters.AddWithValue("@ex_copy", ex_copy)
         con.Open()
         Dim kr = cmd.ExecuteScalar
         con.Close()
