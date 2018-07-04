@@ -137,19 +137,14 @@
 
     function getKr() {
         $.ajax({
-            url: 'MakeExam.aspx/getKr',
+            url: 'Check.aspx/getKr',
             method: 'post',
             data: JSON.stringify({ ex_id: Cookies.get('ex_id'), ex_copy: $('#select_exam_copy option:selected').val()}),
             dataType: 'json',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
-                var exam = $(data.d)[0];
-                $('#lbl_year').text(exam.year);
-                $('#lbl_term').text((exam.term > 2) ? 'ภาคฤดูร้อน' : 'ภาคการศึกษาที่ ' + exam.term);
-                $('#lbl_subject').text(exam.subject_name);
-                $('#lbl_date').text(moment(exam.exam_start_time).format('DD/MM/YYYY'));
-                $('#lbl_time').text(moment(exam.exam_start_time).format('HH:mm') + ' ถึง ' + moment(exam.exam_end_time).format('HH:mm'));
-                $('#lbl_exam_gain').text(exam.exam_gain);
+                var kr = $(data.d)[0];
+                $('#lbl_exam_kr').text(kr);
             }
         });
     }
